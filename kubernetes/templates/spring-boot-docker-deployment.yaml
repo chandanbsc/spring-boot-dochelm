@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    jkube.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/spring-boot-docker
+    jkube.io/git-url: https://github.com/chandanbsc/spring-boot-docker.git
+    jkube.io/scm-tag: HEAD
+    jkube.io/git-commit: 8ca6bea457057df524420a73a7d7dad1b38c766e
+    jkube.io/git-branch: master
+  labels:
+    testProject: spring-boot-yaml-label-all
+    app: spring-boot-docker
+    provider: jkube
+    version: 0.1.1-SNAPSHOT
+    group: com.example
+  name: spring-boot-docker
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: spring-boot-docker
+      provider: jkube
+      group: com.example
+  template:
+    metadata:
+      annotations:
+        jkube.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/spring-boot-docker
+        jkube.io/git-url: https://github.com/chandanbsc/spring-boot-docker.git
+        jkube.io/scm-tag: HEAD
+        jkube.io/git-commit: 8ca6bea457057df524420a73a7d7dad1b38c766e
+        jkube.io/git-branch: master
+      labels:
+        project: spring-boot-docker
+        testProject: spring-boot-yaml-label-all
+        app: spring-boot-docker
+        provider: jkube
+        version: 0.1.1-SNAPSHOT
+        group: com.example
+      name: spring-boot-docker
+      namespace: spring-boot-docker
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        image: chandanbsc/spring-boot-docker-dev:0.1.1-SNAPSHOT
+        imagePullPolicy: IfNotPresent
+        name: chandanbsc-spring-boot-docker
+        securityContext:
+          privileged: false
+        volumeMounts:
+        - mountPath: /deployments/config
+          name: config
+      volumes:
+      - configMap:
+          items:
+          - key: application.properties
+            path: application.properties
+          name: spring-boot-docker
+        name: config

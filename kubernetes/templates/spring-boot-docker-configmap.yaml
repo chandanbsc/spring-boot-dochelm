@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    testProject: spring-boot-yaml-label-all
+    app: spring-boot-docker
+    provider: jkube
+    version: 0.1.1-SNAPSHOT
+    group: com.example
+  name: spring-boot-docker
+data:
+  application.properties: |
+    # spring application properties file
+    welcome = Hello from Kubernetes ConfigMap!!!
+    dummy = some value

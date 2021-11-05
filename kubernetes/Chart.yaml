@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+name: sp-boot-doc-helm
+home: https://projects.spring.io/spring-boot/#/spring-boot-starter-parent/spring-boot-docker
+sources:
+- https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/spring-boot-docker
+version: 0.1.1-SNAPSHOT
+description: "Demo project for Spring Boot\n\t\tIncludes kubernetes yml file creation\n\
+  \t\tIncludes helm chart creation"
+keywords:
+- spring
+- boot
+- docker
+- k8s
+- helm
+maintainers:
+- name: Pivotal
+  email: info@pivotal.io
